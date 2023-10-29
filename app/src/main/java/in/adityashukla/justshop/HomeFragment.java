@@ -1,6 +1,7 @@
 package in.adityashukla.justshop;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -40,7 +42,7 @@ public class HomeFragment extends Fragment {
  RequestQueue requestQueue;
     StringRequest stringRequest;
 
-    String Url = "https://dummyjson.com/products";
+   private String Url = "https://dummyjson.com/products";
     Button button;
     TextView textView;
     List<Product>   list = new ArrayList();
@@ -49,7 +51,9 @@ public class HomeFragment extends Fragment {
     ListView listView;
 
     SearchView searchView;
+    private ImageView checkList,wishList;
     private List<Product> filteredProductList = new ArrayList();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +63,9 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
+
+        checkList = view.findViewById(R.id.checkList);
+        wishList = view.findViewById(R.id.wishList);
 
 
         listView = view.findViewById(R.id.listView);
@@ -157,6 +164,22 @@ public class HomeFragment extends Fragment {
 
                 }
                 return true;
+            }
+        });
+
+        checkList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),CheckListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        wishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),WishListActivity.class);
+                startActivity(intent);
             }
         });
 
